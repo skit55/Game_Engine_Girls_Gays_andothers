@@ -20,6 +20,7 @@ public class SmoothWasdController : MonoBehaviour
     float yVel;
     float turnVel;                    // für SmoothDampAngle
 
+
     void Awake()
     {
         cc = GetComponent<CharacterController>();
