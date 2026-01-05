@@ -19,8 +19,6 @@ public class EInteractTrigger : MonoBehaviour, IPlayerTrigger
     {
         if (action == null) return;
 
-        // falls ihr wirklich nie overlapped: reicht das.
-        // wenn doch, lösen wir Focus-Lock später.
         currentPlayer = player;
 
         if (armed) return;
@@ -32,13 +30,23 @@ public class EInteractTrigger : MonoBehaviour, IPlayerTrigger
 
     public void OnPlayerExit(PlayerInteractor player)
     {
+        if (player != currentPlayer) return;
+        Disarm();
+    }
+
+    void OnDisable() => Disarm();   // <-- CRITICAL
+    void OnDestroy() => Disarm();   // <-- CRITICAL
+
+    void Disarm()
+    {
         if (!armed) return;
 
-        // nur disarmen, wenn es der gleiche Player ist
-        if (player != currentPlayer) return;
+        // safe unsubscribe (auch wenn InputHub beim Shutdown evtl. schon weg ist)
+        if (InputHub.Instance != null)
+            InputHub.Instance.InteractPressed -= HandleInteractPressed;
 
-        InputHub.Instance.InteractPressed -= HandleInteractPressed;
-        UIManager.Instance.HideWorldPrompt();
+        if (UIManager.Instance != null)
+            UIManager.Instance.HideWorldPrompt();
 
         armed = false;
         currentPlayer = null;
@@ -48,10 +56,11 @@ public class EInteractTrigger : MonoBehaviour, IPlayerTrigger
     {
         if (!armed || action == null || currentPlayer == null) return;
 
-        // Optional: nur in Exploration erlauben
-        if (GameStateManager.Instance != null && GameStateManager.Instance.CurrentState != GameState.Exploration)
+        if (GameStateManager.Instance != null &&
+            GameStateManager.Instance.CurrentState != GameState.Exploration)
             return;
 
+        // Action ausführen
         action.Execute(currentPlayer);
     }
 }

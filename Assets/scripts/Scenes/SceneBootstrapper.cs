@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SceneBootstrapper : MonoBehaviour
 {
-    [SerializeField] string initialScene = "Street";
-    [SerializeField] string initialSpawnId = "StreetStart";
+    [SerializeField] public string initialScene = "Street";
+    [SerializeField] public string initialSpawnId = "StreetStart";
 
     void Start()
     {
