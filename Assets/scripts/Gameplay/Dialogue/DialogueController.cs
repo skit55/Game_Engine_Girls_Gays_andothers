@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueController : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class DialogueController : MonoBehaviour
     [SerializeField] GameObject panel;
     [SerializeField] TextMeshProUGUI speakerLabel;
     [SerializeField] TextMeshProUGUI bodyLabel;
+
+    [Header("Choices UI")]
+    [SerializeField] GameObject choicesPanel;
+    [SerializeField] Button[] choiceButtons;                 // size 3
+    [SerializeField] TextMeshProUGUI[] choiceButtonLabels;   // size 3 (Text components in buttons)
 
     [Header("Typewriter")]
     [SerializeField] float charsPerSecond = 40f;
@@ -21,21 +27,36 @@ public class DialogueController : MonoBehaviour
     bool isTyping;
     string fullLine = "";
 
+    bool choicesOpen;
+
     void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
 
         if (panel != null) panel.SetActive(false);
+        if (choicesPanel != null) choicesPanel.SetActive(false);
+    }
+
+    void Update()
+    {
+        // Optional: 1/2/3 w‰hrend Choices offen sind
+        if (!choicesOpen) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) Choose(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) Choose(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) Choose(2);
     }
 
     public void StartDialogue(DialogueData data)
     {
         current = data;
         lineIndex = 0;
+        choicesOpen = false;
 
         if (speakerLabel != null) speakerLabel.text = current.speakerName;
         if (panel != null) panel.SetActive(true);
+        if (choicesPanel != null) choicesPanel.SetActive(false);
 
         // Input routing: Space steuert Dialog
         InputHub.Instance.AdvancePressed += OnAdvance;
@@ -46,7 +67,8 @@ public class DialogueController : MonoBehaviour
     public void EndDialogue()
     {
         // cleanup
-        InputHub.Instance.AdvancePressed -= OnAdvance;
+        if (InputHub.Instance != null)
+            InputHub.Instance.AdvancePressed -= OnAdvance;
 
         if (typing != null) StopCoroutine(typing);
         typing = null;
@@ -54,7 +76,9 @@ public class DialogueController : MonoBehaviour
         isTyping = false;
         fullLine = "";
         current = null;
+        choicesOpen = false;
 
+        if (choicesPanel != null) choicesPanel.SetActive(false);
         if (panel != null) panel.SetActive(false);
 
         //TODO: Make Fight Mode appear, on aggressive NPC
@@ -95,6 +119,9 @@ public class DialogueController : MonoBehaviour
     {
         if (current == null) return;
 
+        // Wenn Choice offen ist, ignorieren wir Space
+        if (choicesOpen) return;
+
         // 1) wenn noch tippt -> skip
         if (isTyping)
         {
@@ -108,12 +135,69 @@ public class DialogueController : MonoBehaviour
 
         // 2) n‰chste Line / Ende
         lineIndex++;
+
+        // Wenn Dialog zu Ende ist: entweder Choices oder Ende
         if (lineIndex >= current.lines.Length)
         {
+            if (current.hasChoices)
+            {
+                OpenChoices();
+                return;
+            }
+
             EndDialogue();
             return;
         }
 
         ShowLine(lineIndex);
+    }
+
+    void OpenChoices()
+    {
+        choicesOpen = true;
+
+        if (choicesPanel != null)
+            choicesPanel.SetActive(true);
+
+        // Buttons setzen + onClick binden
+        for (int i = 0; i < 3; i++)
+        {
+            bool hasEntry =
+                current.choiceTexts != null && i < current.choiceTexts.Length &&
+                !string.IsNullOrWhiteSpace(current.choiceTexts[i]) &&
+                current.choiceNext != null && i < current.choiceNext.Length &&
+                current.choiceNext[i] != null;
+
+            if (choiceButtons != null && i < choiceButtons.Length && choiceButtons[i] != null)
+            {
+                choiceButtons[i].gameObject.SetActive(hasEntry);
+
+                choiceButtons[i].onClick.RemoveAllListeners();
+                int captured = i;
+                if (hasEntry)
+                    choiceButtons[i].onClick.AddListener(() => Choose(captured));
+            }
+
+            if (choiceButtonLabels != null && i < choiceButtonLabels.Length && choiceButtonLabels[i] != null)
+            {
+                choiceButtonLabels[i].text = hasEntry ? current.choiceTexts[i] : "";
+            }
+        }
+    }
+
+    void Choose(int index)
+    {
+        if (!choicesOpen || current == null) return;
+
+        if (current.choiceNext == null || index < 0 || index >= current.choiceNext.Length) return;
+        DialogueData next = current.choiceNext[index];
+        if (next == null) return;
+
+        // Choice UI schlieﬂen
+        choicesOpen = false;
+        if (choicesPanel != null) choicesPanel.SetActive(false);
+
+        // N‰chsten Dialog starten
+        StartDialogue(next);
     }
 }

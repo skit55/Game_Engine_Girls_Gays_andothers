@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 567f41c10aae4d643af49873442ce730, type: 3}
-  m_Name: NPC1
+  m_Name: gimmedick 2
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   speakerName: TEST
   lines:
-  - Hello there, we are testing Dialogue
-  - is it working????
-  - yess it is!!!
-  hasChoices: 1
+  - Ill help you stepbrother!
+  hasChoices: 0
   choiceTexts:
-  - I want Coke
-  - What a fat Dick Bro!
-  - Im Stuck Stepbrother
+  - 
+  - 
+  - 
   choiceNext:
-  - {fileID: 11400000, guid: f6534a7fccbe9db4896aa0d2c336deb9, type: 2}
-  - {fileID: 11400000, guid: 9537975bea11c8e4bb4f6259104d4c67, type: 2}
-  - {fileID: 11400000, guid: 3b840fd772b34ef45b4d2ed7d5fe5662, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
