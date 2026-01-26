@@ -71,7 +71,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 2100000, guid: 33c38ee6e70d5dd46a8e95f1054ae9fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d19cca2cda38248b8e96fc0d406262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorAction
+  spawnId: 
+  sceneName: 
 --- !u!114 &2946379966960711313
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,48 +1,64 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerBrain : MonoBehaviour
 {
-    [Header("Disable these when NOT in Exploration")]
-    [SerializeField] Behaviour[] disableOutsideExploration;
+    [Header("Enable these only in Exploration")]
+    [SerializeField] Behaviour[] enabledInExploration;
 
-    void Start()
+    [Header("Enable these only in Fight")]
+    [SerializeField] Behaviour[] enabledInFight;
+
+    [SerializeField] public GameObject normalVisual;
+    [SerializeField] public GameObject FightVisual;
+    bool bound;
+
+    void OnEnable() => TryBind();
+
+    void Update()
     {
-        // Start läuft garantiert NACH allen Awakes
-        StartCoroutine(BindWhenReady());
+        if (!bound) TryBind();
     }
 
-    IEnumerator BindWhenReady()
+    void TryBind()
     {
-        // warten bis GSM existiert
-        while (GameStateManager.Instance == null)
-            yield return null;
+        var gsm = GameStateManager.Instance;
+        if (gsm == null) return;
 
-        Debug.Log("PlayerBrain binding to GSM id=" + GameStateManager.Instance.GetInstanceID());
+        gsm.OnStateChanged -= Apply;
+        gsm.OnStateChanged += Apply;
 
-        GameStateManager.Instance.OnStateChanged -= Apply;
-        GameStateManager.Instance.OnStateChanged += Apply;
-
-        // initial anwenden
-        Apply(GameStateManager.Instance.CurrentState);
+        Apply(gsm.CurrentState);
+        bound = true;
     }
 
     void OnDisable()
     {
-        if (GameStateManager.Instance != null)
-            GameStateManager.Instance.OnStateChanged -= Apply;
+        var gsm = GameStateManager.Instance;
+        if (gsm != null) gsm.OnStateChanged -= Apply;
+        bound = false;
     }
 
     void Apply(GameState state)
     {
-        Debug.Log("PlayerBrain Apply: " + state);
+        bool exploration = state == GameState.Exploration;
+        bool fight = state == GameState.Fight;
 
-        bool exploration = (state == GameState.Exploration);
-
-        for (int i = 0; i < disableOutsideExploration.Length; i++)
+        // Exploration set
+        for (int i = 0; i < enabledInExploration.Length; i++)
         {
-            if (disableOutsideExploration[i] != null)
-                disableOutsideExploration[i].enabled = exploration;
+            var b = enabledInExploration[i];
+            if (b != null) b.enabled = exploration;
         }
+
+        // Fight set
+        for (int i = 0; i < enabledInFight.Length; i++)
+        {
+            var b = enabledInFight[i];
+            if (b != null) b.enabled = fight;
+            
+        }
+
+        normalVisual.SetActive(exploration);
+        FightVisual.SetActive(!exploration);
     }
 }
