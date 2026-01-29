@@ -9,6 +9,8 @@ public class DoorAction : MonoBehaviour, IAction
 
     public void Execute(PlayerTriggerSensor player)
     {
+        
+
         // safety: only in exploration
         if (GameStateManager.Instance != null &&
             GameStateManager.Instance.CurrentState != GameState.Exploration)

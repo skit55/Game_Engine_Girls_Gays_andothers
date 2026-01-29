@@ -247,50 +247,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &134890794
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 134890796}
-  - component: {fileID: 134890795}
-  m_Layer: 0
-  m_Name: FightApplier
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &134890795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134890794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be887df9b72a04044a5f9c31d9310870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FightResultApplier
---- !u!4 &134890796
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134890794}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.52224, y: 0.48389, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &148033665
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +359,7 @@ MonoBehaviour:
   panel: {fileID: 338377636}
   speakerLabel: {fileID: 1755575702}
   bodyLabel: {fileID: 307872291}
+  dialogueId: NPC1_FirstTalk
   charsPerSecond: 20
 --- !u!1 &736616768
 GameObject:
@@ -1621,6 +1578,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1641530389}
   m_SourcePrefab: {fileID: 100100000, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+--- !u!1001 &7732584005914172573
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.52224
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.48389
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612467438956134834, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726386065926548583, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
+      propertyPath: m_Name
+      value: FightApplier
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 284f14cbd1e0d4ee88eaee2a8fad6188, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1634,4 +1648,4 @@ SceneRoots:
   - {fileID: 1186911970}
   - {fileID: 148033666}
   - {fileID: 1950247375}
-  - {fileID: 134890796}
+  - {fileID: 7732584005914172573}

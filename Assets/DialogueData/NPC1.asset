@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: NPC1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   speakerName: TEST
+  DialogueID: test-dialogue
   lines:
   - Hello there, we are testing Dialogue
   - is it working?

@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2047970341702969653, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: actionBehaviour
+      value: 
+      objectReference: {fileID: 1929090738}
     - target: {fileID: 2468871316137862562, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
       propertyPath: m_LocalScale.x
       value: 7.9741
@@ -175,6 +179,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3093660548301189979, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3441398048000039106, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
       propertyPath: spawnId
       value: StreetHouse
@@ -186,6 +194,18 @@ PrefabInstance:
     - target: {fileID: 5672629280709702772, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
       propertyPath: m_Name
       value: level door
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130333354397149437, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635867845036119844, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: spawnId
+      value: StreetStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635867845036119844, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: sceneName
+      value: Street
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -349,6 +369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   id: HouseStart
+  applyRotation: 1
+  useSpawnRotation: 1
+  lookTarget: {fileID: 0}
 --- !u!4 &420481825
 Transform:
   m_ObjectHideFlags: 0
@@ -723,6 +746,17 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1929090738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6635867845036119844, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+  m_PrefabInstance: {fileID: 261505481}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d19cca2cda38248b8e96fc0d406262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorAction
 --- !u!1 &1954089646
 GameObject:
   m_ObjectHideFlags: 0

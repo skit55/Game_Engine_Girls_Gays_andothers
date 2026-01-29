@@ -5,7 +5,7 @@ using TMPro;
 public class DialogueController : MonoBehaviour
 {
     public static DialogueController Instance { get; private set; }
-
+    public event System.Action OnDialogueFinished; //DialogueController bekommt ein Event 
     [Header("UI")]
     [SerializeField] GameObject panel;
     [SerializeField] TextMeshProUGUI speakerLabel;
@@ -34,12 +34,14 @@ public class DialogueController : MonoBehaviour
         current = data;
         lineIndex = 0;
 
+        // Setzt die speakerName und startet das Panel
         if (speakerLabel != null) speakerLabel.text = current.speakerName;
         if (panel != null) panel.SetActive(true);
 
         // Input routing: Space steuert Dialog
         InputHub.Instance.AdvancePressed += OnAdvance;
 
+        // Setzt den Dialogtext
         ShowLine(lineIndex);
     }
 
@@ -53,13 +55,26 @@ public class DialogueController : MonoBehaviour
 
         isTyping = false;
         fullLine = "";
+
+        // ⚡ Flag setzen bevor current gelöscht wird
+        if (current != null && !string.IsNullOrEmpty(current.DialogueID) && WorldFlags.Instance != null)
+        {
+            // Speichert die ID des Dialogs in den WorldFlags
+            WorldFlags.Instance.SetDialogueCompleted(current.DialogueID);
+            Debug.Log($"[Dialogue] Completed: {current.DialogueID}");
+        }
+        else
+        {
+            Debug.LogError("[Dialogue] DialogueID is empty or WorldFlags.Instance is null.");
+        }
+
         current = null;
 
         if (panel != null) panel.SetActive(false);
+        // End dialog trigger
+        OnDialogueFinished?.Invoke();
 
-        //TODO: Make Fight Mode appear, on aggressive NPC
-
-        // zur�ck zu Exploration
+        // Zurück zu Exploration
         if (GameStateManager.Instance != null)
             GameStateManager.Instance.SetState(GameState.Exploration);
     }
@@ -106,7 +121,7 @@ public class DialogueController : MonoBehaviour
             return;
         }
 
-        // 2) n�chste Line / Ende
+        // 2) nächste Line / Ende
         lineIndex++;
         if (lineIndex >= current.lines.Length)
         {

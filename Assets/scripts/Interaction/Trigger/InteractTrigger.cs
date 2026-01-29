@@ -1,27 +1,43 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class InteractTrigger : MonoBehaviour, ITrigger
 {
     [SerializeField] MonoBehaviour actionBehaviour;
 
-    IAction action;
+    IAction Action
+    {
+        get
+        {
+            if (_action == null && actionBehaviour != null)
+                _action = actionBehaviour as IAction;
+
+            return _action;
+        }
+    }
+
+    IAction _action;
     PlayerTriggerSensor currentPlayer;
     bool armed;
 
-    void Awake()
+    void OnValidate()
     {
-        action = actionBehaviour as IAction;
-        if (action == null)
-            Debug.LogError($"InteractTrigger on {name}: actionBehaviour does not implement IAction.");
+        if (actionBehaviour != null && !(actionBehaviour is IAction))
+        {
+            Debug.LogError(
+                $"InteractTrigger on {name}: Assigned actionBehaviour does not implement IAction!",
+                this
+            );
+        }
     }
 
     public void OnPlayerEnter(PlayerTriggerSensor player)
     {
-        if (action == null) return;
+        
+        Debug.Log($"[InteractTrigger] Player entered {name}");
+        if (Action == null) return;
 
         currentPlayer = player;
 
-        // nur in Exploration aktivieren
         if (GameStateManager.Instance != null &&
             GameStateManager.Instance.CurrentState != GameState.Exploration)
             return;
@@ -44,7 +60,7 @@ public class InteractTrigger : MonoBehaviour, ITrigger
         armed = true;
 
         if (UIManager.Instance != null)
-            UIManager.Instance.ShowWorldPrompt("E " + action.PromptText);
+            UIManager.Instance.ShowWorldPrompt("E " + Action.PromptText);
 
         if (InputHub.Instance != null)
             InputHub.Instance.InteractPressed += HandleInteractPressed;
@@ -72,26 +88,24 @@ public class InteractTrigger : MonoBehaviour, ITrigger
 
     void HandleStateChanged(GameState state)
     {
-        // Exploration verlassen → sofort deaktivieren
         if (state != GameState.Exploration)
         {
             Disarm();
             return;
         }
 
-        // zurück in Exploration: falls Player noch drin steht, wieder arm
         if (currentPlayer != null && !armed)
             Arm();
     }
 
     void HandleInteractPressed()
     {
-        if (!armed || action == null || currentPlayer == null) return;
+        if (!armed || Action == null || currentPlayer == null) return;
 
         if (GameStateManager.Instance != null &&
             GameStateManager.Instance.CurrentState != GameState.Exploration)
             return;
 
-        action.Execute(currentPlayer);
+        Action.Execute(currentPlayer);
     }
 }
