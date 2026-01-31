@@ -1754,7 +1754,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   items: []
   keyAnchor: {fileID: 1702316778}
-  keyVisualPrefab: {fileID: 3247947006694393466, guid: ef6c8dfac6aec4b96a58d83038e33ff0, type: 3}
+  keyVisual: {fileID: 4700727989997038211, guid: 08f546ef813d549b0aafca62c46cd6e5, type: 3}
+  keyItem: {fileID: 11400000, guid: ec3611cd35cb4446b802afa348b5cfbe, type: 2}
 --- !u!136 &7713286795071240895
 CapsuleCollider:
   m_ObjectHideFlags: 0
