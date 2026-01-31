@@ -3008,6 +3008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GateAction
   closedGroup: {fileID: 1674687632}
   openGroup: {fileID: 305745357}
+  blockingCollider: {fileID: 1660006807}
   pause: 0.5
   speed: 1.12
 --- !u!114 &1950072196
@@ -3022,8 +3023,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4492661dd70974e1e91b335c47a06eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConditionalAction
-  conditionType: 0
+  conditionType: 2
   requiredFlagId: 
+  requiredItem: {fileID: 11400000, guid: ec3611cd35cb4446b802afa348b5cfbe, type: 2}
+  consumeItem: 1
   actionToExecute: {fileID: 1950072195}
   lockedText: Locked
   blockMode: 0

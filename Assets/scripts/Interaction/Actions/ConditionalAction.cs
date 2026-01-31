@@ -6,144 +6,113 @@ public class ConditionalAction : MonoBehaviour, IAction
     {
         get
         {
-            // Wenn Bedingung nicht erfüllt, zeige "Locked" an
             if (!IsConditionMet())
                 return lockedText;
 
-            // Ansonsten zeige Prompt der eigentlichen Action
             var action = actionToExecute as IAction;
             return action != null ? action.PromptText : "???";
         }
     }
 
+    public enum ConditionType { DialogueCompleted, EnemyDefeated, HasItem }
+
     [Header("Condition")]
     [SerializeField] ConditionType conditionType = ConditionType.DialogueCompleted;
-    [SerializeField] string requiredFlagId;  // ID zum Prüfen
+    [SerializeField] string requiredFlagId;  
+    [SerializeField] ItemData requiredItem;   
+    [SerializeField] bool consumeItem = true; 
 
     [Header("Action")]
-    [SerializeField] MonoBehaviour actionToExecute; // Tür / Dialog / andere Aktion
+    [SerializeField] MonoBehaviour actionToExecute; 
 
     [Header("UI")]
-    [SerializeField] string lockedText = "Locked";  // Text wenn nicht freigeschaltet
+    [SerializeField] string lockedText = "Locked (Key required)";  
 
     [Header("Blocking (Optional)")]
     [SerializeField] BlockMode blockMode = BlockMode.None;
-    [SerializeField] GameObject blockingCollider;  // Collider der deaktiviert wird
-    [SerializeField] GameObject visualBlocker;     // Visuelles Element (z.B. Gitter)
+    [SerializeField] GameObject blockingCollider;  
+    [SerializeField] GameObject visualBlocker;     
 
-    public enum ConditionType
-    {
-        DialogueCompleted,
-        EnemyDefeated
-    }
+    public enum BlockMode { None, DisableCollider, HideVisual }
 
-    public enum BlockMode
-    {
-        None,              // Nur UI-Prompt, keine physische Blockade
-        DisableCollider,   // Collider deaktivieren wenn freigeschaltet
-        HideVisual         // Visuelles Element verstecken wenn freigeschaltet
-    }
+    private Inventory cachedInventory;
+    private bool isPermanentlyUnlocked = false; // <-- NEU: Speichert, ob die Tür offen ist
 
     void Start()
     {
         UpdateBlocking();
     }
 
-    void OnEnable()
-    {
-        UpdateBlocking();
-    }
-
     public void Execute(PlayerTriggerSensor player)
     {
-        // Prüfe Bedingung
-        if (!IsConditionMet())
+        // Wenn bereits offen, einfach ausführen
+        if (isPermanentlyUnlocked)
         {
-            Debug.Log($"ConditionalAction: Bedingung nicht erfüllt - {conditionType}: {requiredFlagId}");
-            
-            // Feedback: Locked sound oder UI message
-            if (UIManager.Instance != null)
-            {
-                // Könnte hier eine Message anzeigen
-            }
+            ExecuteInnerAction(player);
             return;
         }
 
-        // Bedingung erfüllt - führe Action aus
+        cachedInventory = player.GetComponentInParent<Inventory>();
+
+        if (!IsConditionMet())
+        {
+            Debug.Log("Schlüssel fehlt!");
+            return;
+        }
+
+        // Erfolg!
+        if (conditionType == ConditionType.HasItem && consumeItem && cachedInventory != null)
+        {
+            cachedInventory.RemoveItem(requiredItem);
+        }
+
+        isPermanentlyUnlocked = true; // <-- NEU: Jetzt ist die Bedingung für immer erfüllt
+        UpdateBlocking(); // Sofort Collider updaten
+        ExecuteInnerAction(player);
+    }
+
+    private void ExecuteInnerAction(PlayerTriggerSensor player)
+    {
         var action = actionToExecute as IAction;
-        if (action != null)
-        {
-            Debug.Log($"ConditionalAction: Bedingung erfüllt - führe Action aus");
-            action.Execute(player);
-        }
-        else
-        {
-            Debug.LogError("ConditionalAction: actionToExecute is not an IAction");
-        }
+        if (action != null) action.Execute(player);
     }
 
     private bool IsConditionMet()
     {
-        if (WorldFlags.Instance == null)
+        if (isPermanentlyUnlocked) return true; // <-- NEU
+
+        if (conditionType == ConditionType.HasItem)
         {
-            Debug.LogError("ConditionalAction: WorldFlags.Instance not found!");
-            return false;
+            if (cachedInventory == null) cachedInventory = FindObjectOfType<Inventory>();
+            return cachedInventory != null && cachedInventory.HasItem(requiredItem);
         }
 
+        // WorldFlags Logik...
+        if (WorldFlags.Instance == null) return false;
         switch (conditionType)
         {
-            case ConditionType.DialogueCompleted:
-                return WorldFlags.Instance.IsDialogueCompleted(requiredFlagId);
-            
-            case ConditionType.EnemyDefeated:
-                return WorldFlags.Instance.IsDefeated(requiredFlagId);
-            
-            default:
-                return false;
+            case ConditionType.DialogueCompleted: return WorldFlags.Instance.IsDialogueCompleted(requiredFlagId);
+            case ConditionType.EnemyDefeated: return WorldFlags.Instance.IsDefeated(requiredFlagId);
+            default: return false;
         }
     }
 
     private void UpdateBlocking()
     {
-        bool conditionMet = IsConditionMet();
+        bool conditionMet = isPermanentlyUnlocked || IsConditionMet(); // <-- Geändert
 
-        switch (blockMode)
-        {
-            case BlockMode.DisableCollider:
-                if (blockingCollider != null)
-                {
-                    // Wenn Bedingung erfüllt: Collider deaktivieren (durchgehbar)
-                    // Wenn nicht erfüllt: Collider aktivieren (blockiert)
-                    blockingCollider.SetActive(!conditionMet);
-                }
-                break;
+        if (blockMode == BlockMode.DisableCollider && blockingCollider != null)
+            blockingCollider.SetActive(!conditionMet);
 
-            case BlockMode.HideVisual:
-                if (visualBlocker != null)
-                {
-                    // Wenn Bedingung erfüllt: Visual verstecken
-                    // Wenn nicht erfüllt: Visual zeigen
-                    visualBlocker.SetActive(!conditionMet);
-                }
-                break;
-        }
+        if (blockMode == BlockMode.HideVisual && visualBlocker != null)
+            visualBlocker.SetActive(!conditionMet);
     }
 
-    // Optional: Update in Play Mode wenn Flag gesetzt wird
     void Update()
     {
-        if (blockMode != BlockMode.None)
+        if (blockMode != BlockMode.None && !isPermanentlyUnlocked) // Performance: nur Updaten wenn noch zu
         {
             UpdateBlocking();
-        }
-    }
-
-    // Optional: Für Inspector-Preview
-    void OnValidate()
-    {
-        if (actionToExecute != null && !(actionToExecute is IAction))
-        {
-            Debug.LogWarning($"ConditionalAction on {name}: actionToExecute does not implement IAction!");
         }
     }
 }
