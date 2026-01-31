@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8639272337065544687, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
   m_PrefabInstance: {fileID: 7713286795071240892}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7713286795071240893}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52d06980f03971d44b2fdb49f0d58d14, type: 3}
@@ -1691,10 +1691,57 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1569995093}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3336497169179324978, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7713286795071240894}
+    - targetCorrespondingSourceObject: {fileID: 3336497169179324978, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7713286795071240895}
     - targetCorrespondingSourceObject: {fileID: 206834582193959839, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1641530389}
   m_SourcePrefab: {fileID: 100100000, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+--- !u!1 &7713286795071240893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3336497169179324978, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+  m_PrefabInstance: {fileID: 7713286795071240892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7713286795071240894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7713286795071240893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc1dd71152e748c6a4ce63f371c02b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  items: []
+--- !u!136 &7713286795071240895
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7713286795071240893}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7732584005914172573
 PrefabInstance:
   m_ObjectHideFlags: 0
