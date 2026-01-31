@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Street2.unity
     guid: 8c531c1228dd88741affe886c75d84dc
+  - enabled: 1
+    path: Assets/MainMenu.unity
+    guid: 3c3da0cc9bad5456ab52a70a7772f3e8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
