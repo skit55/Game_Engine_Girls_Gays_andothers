@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 5d36129f7fc4755429ee3fc944db3918
+guid: 331b2c70eeeed4945980a8720182c7ab
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: street2
-    second: {fileID: 2100000, guid: 52551ed140a38e7428954bd52724569d, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
