@@ -26,6 +26,7 @@ public class GateAction : MonoBehaviour, IAction
             blockingCollider.SetActive(false);
             Debug.Log("<color=green>GateAction:</color> Collider wurde deaktiviert.");
         }
+        SfxManager.Instance.PlaySFX2D(SfxBank.Instance.door);
 
         StartCoroutine(Fade(pause, speed));
     }

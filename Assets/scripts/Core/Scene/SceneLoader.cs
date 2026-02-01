@@ -13,7 +13,6 @@ public class SceneLoader : MonoBehaviour
 
     bool isLoading;
 
-    // optional: "last request wins" während loading
     string pendingScene;
     string pendingSpawn;
     bool hasPending;
@@ -22,13 +21,10 @@ public class SceneLoader : MonoBehaviour
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
-
-        // Wenn dein Core über Szenen hinweg leben soll:
     }
 
     public void LoadContentScene(string newScene, string spawnId)
     {
-        // falls während loading nochmal gedrückt wird: merken, aber nicht parallel starten
         if (isLoading)
         {
             pendingScene = newScene;
@@ -44,13 +40,16 @@ public class SceneLoader : MonoBehaviour
     {
         isLoading = true;
 
-        // falls es schon aktiv ist + Spieler nur umsetzen
+        // Wenn die Scene schon geladen ist: nur aktiv setzen + Player umsetzen
         if (IsLoaded(newScene))
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(newScene));
+            currentContentScene = newScene;
+
             PlacePlayerAtSpawn(spawnId);
 
-            // kleiner Puffer gegen Spam-Input
+            // Musik kommt automatisch über SceneAudioTag.Start()
+
             yield return new WaitForSeconds(0.15f);
 
             isLoading = false;
@@ -58,29 +57,30 @@ public class SceneLoader : MonoBehaviour
             yield break;
         }
 
+        // alte merken, bevor wir überschreiben
+        string oldScene = currentContentScene;
+
         // neue Content-Scene laden
         yield return SceneManager.LoadSceneAsync(newScene, LoadSceneMode.Additive);
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(newScene));
+        currentContentScene = newScene;
 
         PlacePlayerAtSpawn(spawnId);
 
+        // Musik kommt automatisch über SceneAudioTag.Start() in der neu geladenen Scene
+
         // alte Content-Scene unloaden (wenn vorhanden)
-        if (!string.IsNullOrEmpty(currentContentScene) &&
-            currentContentScene != newScene &&
-            IsLoaded(currentContentScene))
+        if (!string.IsNullOrEmpty(oldScene) &&
+            oldScene != newScene &&
+            IsLoaded(oldScene))
         {
-            yield return SceneManager.UnloadSceneAsync(currentContentScene);
+            yield return SceneManager.UnloadSceneAsync(oldScene);
         }
 
-        currentContentScene = newScene;
-
-        // kleiner Puffer gegen Spam-Input
         yield return new WaitForSeconds(0.15f);
 
         isLoading = false;
-
-        // wenn währenddessen noch Requests kamen: einmal die letzte ausführen
         yield return HandlePendingIfAny();
     }
 
@@ -88,14 +88,12 @@ public class SceneLoader : MonoBehaviour
     {
         if (!hasPending) yield break;
 
-        // pending abholen
         var s = pendingScene;
         var sp = pendingSpawn;
         hasPending = false;
         pendingScene = null;
         pendingSpawn = null;
 
-        // direkt nächste Ladung starten
         yield return LoadRoutine(s, sp);
     }
 

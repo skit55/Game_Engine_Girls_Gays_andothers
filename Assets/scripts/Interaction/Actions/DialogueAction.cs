@@ -18,5 +18,8 @@ public class DialogueAction : MonoBehaviour, IAction
             DialogueController.Instance.StartDialogue(dialogue);
         else
             Debug.LogError("DialogueAction: DialogueController.Instance not found.");
+
+        SfxManager.Instance.PlaySFX2D(SfxBank.Instance.dialogue);
+
     }
 }

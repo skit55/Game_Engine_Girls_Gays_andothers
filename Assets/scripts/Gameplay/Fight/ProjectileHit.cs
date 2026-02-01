@@ -31,6 +31,7 @@ public class ProjectileHit : MonoBehaviour
         {
             resolved = true;
             Debug.Log("Projectile was PARRIED");
+            SfxManager.Instance.PlaySFX2D(SfxBank.Instance.parry);
 
             PlayAndDetach(parryVfx);
             Destroy(destroyRoot.gameObject);
@@ -44,6 +45,7 @@ public class ProjectileHit : MonoBehaviour
         {
             resolved = true;
             Debug.Log("Projectile has HIT the player");
+            SfxManager.Instance.PlaySFX2D(SfxBank.Instance.hurt);
 
             hurt.ApplyDamage(damage);
             PlayAndDetach(hitVfx);

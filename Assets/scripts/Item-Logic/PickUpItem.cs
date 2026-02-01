@@ -10,6 +10,7 @@ public class PickupItem : MonoBehaviour
         if (inventory != null)
         {
             inventory.AddItem(item);
+            SfxManager.Instance.PlaySFX2D(SfxBank.Instance.pickupKey); // Abspielton
             Destroy(gameObject); // Schlüssel verschwindet
         }
     }
