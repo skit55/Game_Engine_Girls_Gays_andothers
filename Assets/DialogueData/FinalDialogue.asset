@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f41c10aae4d643af49873442ce730, type: 3}
   m_Name: FinalDialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  speakerName: 
-  DialogueID: 
-  lines: []
+  speakerName: Catty
+  DialogueID: catty
+  lines:
+  - 'YOU GOT ME '
+  - YOu win
