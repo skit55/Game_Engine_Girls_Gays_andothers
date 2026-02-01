@@ -44,5 +44,7 @@ public class FightAction : MonoBehaviour, IAction
 
         GameStateManager.Instance.SetState(GameState.Fight);
         SceneLoader.Instance.LoadContentScene("Fight", "FightStart");
+        SfxManager.Instance.PlaySFX2D(SfxBank.Instance.fightEnter);
+
     }
 }

@@ -40,12 +40,15 @@ public class PlayerTurnController : MonoBehaviour
 
         // Hier optional: UI einblenden / SFX
         // FightUI.Instance?.ShowTiming(true);
+        SfxManager.Instance.StartLoop2D(SfxBank.Instance.scrollLoop, 0.7f);
+
         Debug.Log("BEGIN PLAYER TURN");
     }
 
     public void EndPlayerTurn(TimingResult result)
     {
         isRunning = false;
+        SfxManager.Instance.StopLoop2D();
 
     }
 
@@ -88,6 +91,14 @@ public class PlayerTurnController : MonoBehaviour
         var result = Evaluate();
         Debug.Log(result.ToString());
         Resolve(result);
+        if(result == TimingResult.Hit)
+        {
+        }
+        else
+        {
+            SfxManager.Instance.PlaySFX2D(SfxBank.Instance.miss);
+        }
+
     }
 
     TimingResult Evaluate()

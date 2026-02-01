@@ -82,6 +82,8 @@ public class FightFlowState : MonoBehaviour
             case FightState.EnemyTurn:
                 // FightUI.Instance?.ShowPressAdvance(false);
                 playerParry.enabled = true;
+                SfxManager.Instance.PlaySFX2D(SfxBank.Instance.turnStart);
+
 
                 enemyTurn.BeginEnemyTurn(currentEnemy);
                 break;
@@ -91,8 +93,11 @@ public class FightFlowState : MonoBehaviour
                 break;
 
             case FightState.PlayerTurn:
+
                 fightUI.Show();
                 playerTurn.BeginPlayerTurn();
+                SfxManager.Instance.PlaySFX2D(SfxBank.Instance.turnStart);
+
                 //Debug.Log("BEGIN PLAYER TURN");
                 break;
 
@@ -101,11 +106,14 @@ public class FightFlowState : MonoBehaviour
                 // FightUI.Instance?.ShowWin();
                 Debug.Log("WIN STATE!");
                 fightUI.ShowResultPanel(true);
+                SfxManager.Instance.PlaySFX2D(SfxBank.Instance.win);
+
                 break;
 
             case FightState.Lose:
                 // FightUI.Instance?.ShowLose();
                 fightUI.ShowResultPanel(false);
+                SfxManager.Instance.PlaySFX2D(SfxBank.Instance.lose);
 
                 break;
         }
