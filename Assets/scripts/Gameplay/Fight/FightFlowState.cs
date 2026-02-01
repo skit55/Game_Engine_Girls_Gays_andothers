@@ -18,6 +18,9 @@ public class FightFlowState : MonoBehaviour
 
     FightState state;
 
+    [SerializeField] public GameObject advance;
+
+
     public event Action<bool> FightFinished; // bool = playerWon
 
 
@@ -90,6 +93,7 @@ public class FightFlowState : MonoBehaviour
 
             case FightState.TurnAdvance:
                 playerParry.enabled = false;
+                advance.SetActive(true);
                 break;
 
             case FightState.PlayerTurn:
@@ -107,13 +111,14 @@ public class FightFlowState : MonoBehaviour
                 Debug.Log("WIN STATE!");
                 fightUI.ShowResultPanel(true);
                 SfxManager.Instance.PlaySFX2D(SfxBank.Instance.win);
-
+                PlayerStats.Instance.Heal();
                 break;
 
             case FightState.Lose:
                 // FightUI.Instance?.ShowLose();
                 fightUI.ShowResultPanel(false);
                 SfxManager.Instance.PlaySFX2D(SfxBank.Instance.lose);
+                PlayerStats.Instance.Heal();
 
                 break;
         }
@@ -121,17 +126,26 @@ public class FightFlowState : MonoBehaviour
 
     void OnAdvancePressed()
     {
-        if (state == FightState.Start) { SetState(FightState.EnemyTurn); return; }
-        if (state == FightState.TurnAdvance) { SetState(FightState.PlayerTurn); return; }
+        if (state == FightState.Start) { 
+            advance.SetActive(false);
+
+            SetState(FightState.EnemyTurn); 
+            return; }
+        if (state == FightState.TurnAdvance) {             advance.SetActive(false);
+SetState(FightState.PlayerTurn); return; }
 
         // NEU: Win/Lose verlassen
         if (state == FightState.Win)
         {
+                        advance.SetActive(false);
+
             FightFinished?.Invoke(true);
             return;
         }
         if (state == FightState.Lose)
         {
+                        advance.SetActive(false);
+
             FightFinished?.Invoke(false);
             return;
         }

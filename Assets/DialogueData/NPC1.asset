@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f41c10aae4d643af49873442ce730, type: 3}
   m_Name: NPC1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  speakerName: TEST
+  speakerName: Susan
   DialogueID: test-dialogue
   lines:
-  - Hello there, we are testing Dialogue
-  - is it working?
-  - is it working?
+  - '*cough* *cough* H-Hello cute little Kitty Cat, is it sunny yet?'
+  - Good to finally see you again you little rascal
+  - Are you looking for your little partner in crime?
+  - I saw the pigeon carry them away!  GRRRRR

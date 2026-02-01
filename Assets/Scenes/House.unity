@@ -180,6 +180,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3093660548301189979, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: m_Size.x
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093660548301189979, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: m_Size.y
+      value: 1.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093660548301189979, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
+      propertyPath: m_Size.z
+      value: 3.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093660548301189979, guid: 81c051473f97b054990e45d8cfe7c414, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -791,6 +803,54 @@ Transform:
   - {fileID: 630252523}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1954476807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1954476809}
+  - component: {fileID: 1954476808}
+  m_Layer: 0
+  m_Name: Spawn_House_Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1954476808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954476807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8aad61107e17c45893867a77b34bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  id: SpawnHousePoint
+  applyRotation: 1
+  useSpawnRotation: 1
+  lookTarget: {fileID: 0}
+--- !u!4 &1954476809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954476807}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.5, y: 2.25, z: 14.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117007683
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,6 +902,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1954089647}
   - {fileID: 420481825}
+  - {fileID: 1954476809}
   - {fileID: 726292544}
   - {fileID: 261505481}
   - {fileID: 2117007685}

@@ -1321,8 +1321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fb76bed0915d44192ba8d5d662b891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  initialScene: Street
-  initialSpawnId: StreetStart
+  initialScene: House
+  initialSpawnId: SpawnHousePoint
 --- !u!4 &2039332388
 Transform:
   m_ObjectHideFlags: 0

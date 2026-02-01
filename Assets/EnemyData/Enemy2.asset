@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Enemy2
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   pattern: 0000000001000000020000000300000003000000020000000200000001000000
-  maxHealth: 1
-  projectileTravelTime: 1.5
+  maxHealth: 2
+  projectileTravelTime: 1
   chainGap: 1
   startJitter: 3
   controlJitter: 4

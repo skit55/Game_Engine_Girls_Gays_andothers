@@ -1,0 +1,16 @@
+# Blender v2.79 (sub 0) OBJ File: 'Nintendogs.blend'
+# www.blender.org
+mtllib Shadow_Circle.mtl
+o vsn_mesh_0__mesh_0_
+v -2.135430 0.010333 2.135430
+v 2.135430 0.010333 2.135430
+v -2.135430 0.010334 -2.135430
+v 2.135430 0.010334 -2.135430
+vt 0.000000 0.000000
+vt 1.000000 0.000000
+vt 0.000000 1.000000
+vt 1.000000 1.000000
+usemtl Shadow_Circle_mat
+s off
+f 1/1 2/2 3/3
+f 2/2 4/4 3/3

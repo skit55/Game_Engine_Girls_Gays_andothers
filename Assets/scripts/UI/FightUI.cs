@@ -15,6 +15,8 @@ public class FightUI : MonoBehaviour
 
     [SerializeField] CanvasGroup WinLosePanel;
     [SerializeField] TextMeshProUGUI WinLose;
+
+
     void OnEnable()
     {
         TrySetupHitZone();
