@@ -8,6 +8,8 @@ public class WorldFlags : MonoBehaviour
     HashSet<string> defeated = new HashSet<string>();
     HashSet<string> completedDialogues = new HashSet<string>();
 
+    
+
     void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
