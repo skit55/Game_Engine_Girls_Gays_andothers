@@ -26,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/House3.unity
     guid: 12c7d36b9616b4e48af2dc3c8b089861
+  - enabled: 1
+    path: Assets/Scenes/House3_upper.unity
+    guid: 51e16cb3ae5b3a140b78967fe44595a3
+  - enabled: 1
+    path: Assets/Scenes/House4.unity
+    guid: 2a538453da4f3ce48a5080693c8c04e6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
