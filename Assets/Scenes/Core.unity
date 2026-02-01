@@ -767,6 +767,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7576968989094169118, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
   m_PrefabInstance: {fileID: 7713286795071240892}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1284634479 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6387861406558385689, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+  m_PrefabInstance: {fileID: 7713286795071240892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1322282144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,6 +1614,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4138508970956851580, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+      propertyPath: near clip plane
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138508970956851580, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
       propertyPath: orthographic size
       value: 13.44
       objectReference: {fileID: 0}
@@ -1703,6 +1712,22 @@ PrefabInstance:
     - target: {fileID: 7048404910156997075, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272624492569115306, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1284634479}
+    - target: {fileID: 8272624492569115306, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+      propertyPath: speedParam
+      value: speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272624492569115306, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+      propertyPath: deceleration
+      value: 50.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8272624492569115306, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
+      propertyPath: turnSmoothTime
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 9119128184953469651, guid: c34e627f88b38f84caca7f3b118cfa7b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
