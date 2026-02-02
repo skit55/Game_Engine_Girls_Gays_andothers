@@ -3,7 +3,12 @@ guid: e29ae1a20acfa4d1da5e8db56dacfe7f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grandma
+    second: {fileID: 2100000, guid: 7dd6c0be09e3d41169b45b81cd51661d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
