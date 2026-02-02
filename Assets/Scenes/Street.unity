@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FightAction
   enemy: {fileID: 11400000, guid: 6186f606025fa8a44a4162524537960e, type: 2}
   encounterId: StreetEnemy1
-  returnSpawnId: StreetEnemy1
+  returnSpawnId: StreetFight1
 --- !u!114 &1588718199
 MonoBehaviour:
   m_ObjectHideFlags: 0
