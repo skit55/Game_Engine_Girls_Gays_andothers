@@ -19,6 +19,10 @@ public class FightFlowState : MonoBehaviour
     FightState state;
 
     [SerializeField] public GameObject advance;
+    [SerializeField] public GameObject leftMouse;
+
+    [SerializeField] public GameObject wasd;
+
 
 
     public event Action<bool> FightFinished; // bool = playerWon
@@ -80,13 +84,17 @@ public class FightFlowState : MonoBehaviour
         {
             case FightState.Start:
                 playerParry.enabled = false;
+                wasd.SetActive(true);
+                leftMouse.SetActive(false);
+                advance.SetActive(true);
                 break;
 
             case FightState.EnemyTurn:
                 // FightUI.Instance?.ShowPressAdvance(false);
+                advance.SetActive(false);
                 playerParry.enabled = true;
                 SfxManager.Instance.PlaySFX2D(SfxBank.Instance.turnStart);
-
+                wasd.SetActive(false);
 
                 enemyTurn.BeginEnemyTurn(currentEnemy);
                 break;
@@ -101,6 +109,7 @@ public class FightFlowState : MonoBehaviour
                 fightUI.Show();
                 playerTurn.BeginPlayerTurn();
                 SfxManager.Instance.PlaySFX2D(SfxBank.Instance.turnStart);
+                leftMouse.SetActive(true);
 
                 //Debug.Log("BEGIN PLAYER TURN");
                 break;
@@ -112,6 +121,9 @@ public class FightFlowState : MonoBehaviour
                 fightUI.ShowResultPanel(true);
                 SfxManager.Instance.PlaySFX2D(SfxBank.Instance.win);
                 PlayerStats.Instance.Heal();
+                leftMouse.SetActive(false);
+                wasd.SetActive(false);
+                advance.SetActive(false);
                 break;
 
             case FightState.Lose:
@@ -119,7 +131,9 @@ public class FightFlowState : MonoBehaviour
                 fightUI.ShowResultPanel(false);
                 SfxManager.Instance.PlaySFX2D(SfxBank.Instance.lose);
                 PlayerStats.Instance.Heal();
-
+                leftMouse.SetActive(false);
+                wasd.SetActive(false);
+                advance.SetActive(false);
                 break;
         }
     }
@@ -132,7 +146,7 @@ public class FightFlowState : MonoBehaviour
             SetState(FightState.EnemyTurn); 
             return; }
         if (state == FightState.TurnAdvance) {             advance.SetActive(false);
-SetState(FightState.PlayerTurn); return; }
+            SetState(FightState.PlayerTurn); return; }
 
         // NEU: Win/Lose verlassen
         if (state == FightState.Win)
