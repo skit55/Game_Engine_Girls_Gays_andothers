@@ -128,6 +128,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4b1d55d6dd1404ac1bb3cece92b94fe2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4b1d55d6dd1404ac1bb3cece92b94fe2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4b1d55d6dd1404ac1bb3cece92b94fe2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4b1d55d6dd1404ac1bb3cece92b94fe2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.2
       objectReference: {fileID: 0}
@@ -259,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f111a3299680142088a34fb4f55510fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrandmaWander
-  moveSpeed: 1.5
+  moveSpeed: 3
   turnSpeed: 5
   waitTimeAtTarget: 2
   waypoints:
