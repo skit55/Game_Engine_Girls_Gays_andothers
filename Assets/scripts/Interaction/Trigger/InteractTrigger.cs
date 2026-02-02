@@ -43,6 +43,7 @@ public class InteractTrigger : MonoBehaviour, ITrigger
             return;
 
         Arm();
+        SfxManager.Instance.PlaySFX2D(SfxBank.Instance.dialogue);
     }
 
     public void OnPlayerExit(PlayerTriggerSensor player)

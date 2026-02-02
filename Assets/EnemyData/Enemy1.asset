@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   pattern: 0000000001000000020000000300000003000000020000000200000001000000
   maxHealth: 1
-  projectileTravelTime: 1
-  chainGap: 0.7
+  projectileTravelTime: 2
+  chainGap: 1
   startJitter: 2
   controlJitter: 3
   projectilePrefab: {fileID: 551867604259047655, guid: e9ed073777d4df4469186dd2dcc3fc90, type: 3}

@@ -1,0 +1,16 @@
+newmtl Cat
+Ka 0.5647059 0.5647059 0.5647059
+Kd 0.5647059 0.5647059 0.5647059
+d 1
+Tr 1
+map_Ka Cat.png
+map_Kd Cat.png
+map_d Cat.png
+newmtl Eye
+Ka 0.5647059 0.5647059 0.5647059
+Kd 0.5647059 0.5647059 0.5647059
+d 1
+Tr 1
+map_Ka Eye.png
+map_Kd Eye.png
+map_d Eye.png

@@ -38,9 +38,9 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void Heal(int amount)
+    public void Heal()
     {
-        currentHp = Mathf.Min(maxHp, currentHp + amount);
+        currentHp = maxHp;
         HpChanged?.Invoke(currentHp, maxHp);
     }
 }

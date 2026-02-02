@@ -8,6 +8,10 @@ public class FightAction : MonoBehaviour, IAction
     [SerializeField] string encounterId = "StreetEnemy1";
     [SerializeField] string returnSpawnId = "StreetEnemy1";
 
+    // ðŸ‘‡ WICHTIG
+    public string EncounterId => encounterId;
+    public EnemyData Enemy => enemy;
+
     public void Execute(PlayerTriggerSensor player)
     {
         if (GameStateManager.Instance != null &&
@@ -31,7 +35,7 @@ public class FightAction : MonoBehaviour, IAction
             return;
         }
 
-        // Return-Scene aus SceneLoader holen (Property ggf. ergänzen)
+        // Return-Scene aus SceneLoader holen (Property ggf. ergï¿½nzen)
         string returnScene = SceneLoader.Instance.CurrentContentSceneName; // <- Property anlegen
 
         FightContext.Instance.SetRequest(new FightRequest
@@ -44,5 +48,7 @@ public class FightAction : MonoBehaviour, IAction
 
         GameStateManager.Instance.SetState(GameState.Fight);
         SceneLoader.Instance.LoadContentScene("Fight", "FightStart");
+        SfxManager.Instance.PlaySFX2D(SfxBank.Instance.fightEnter);
+
     }
 }

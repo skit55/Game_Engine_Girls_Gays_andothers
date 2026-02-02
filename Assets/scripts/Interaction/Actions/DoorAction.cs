@@ -20,5 +20,8 @@ public class DoorAction : MonoBehaviour, IAction
             SceneLoader.Instance.LoadContentScene(sceneName, spawnId);
         else
             Debug.LogError("DoorAction: SceneLoader.Instance not found.");
+
+        SfxManager.Instance.PlaySFX2D(SfxBank.Instance.door);
+
     }
 }

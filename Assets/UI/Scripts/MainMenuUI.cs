@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class MainMenuUI : MonoBehaviour
             Debug.Log("Intro finished – start game next");
             // Example actions:
             // LoadScene("GameScene");
+            SceneManager.LoadScene("Core");
             // or introScreen.SetActive(false);
             // or keep intro visible and change UI
             return;
@@ -89,11 +91,12 @@ public class MainMenuUI : MonoBehaviour
             // introTitle.text = pageIndex == 0 ? "OBJECTIVE" : pageIndex == 1 ? "CONTROLS" : "TIPS";
         }
 
-        // Button label changes on last page
+        // Button label changes on last pfage
         if (nextButtonLabel != null && pages.Length > 0)
         {
             bool lastPage = (pageIndex == pages.Length - 1);
             nextButtonLabel.text = lastPage ? "START GAME" : "NEXT";
+
         }
     }
 }

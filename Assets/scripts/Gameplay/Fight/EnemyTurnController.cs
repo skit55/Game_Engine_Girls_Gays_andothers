@@ -32,6 +32,8 @@ public class EnemyTurnController : MonoBehaviour
         {
             Direction dir = enemy.pattern[i];
             spawner.Spawn(dir, enemy);
+            SfxManager.Instance.PlaySFX2D(SfxBank.Instance.projectileSpawn);
+
             yield return new WaitForSeconds(enemy.chainGap);
         }
 
