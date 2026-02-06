@@ -426,6 +426,110 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1569995094}
   m_SourcePrefab: {fileID: 100100000, guid: 695e776268d34a444942dd2f4874806d, type: 3}
+--- !u!1 &681292292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 681292293}
+  - component: {fileID: 681292296}
+  - component: {fileID: 681292295}
+  - component: {fileID: 681292294}
+  - component: {fileID: 681292297}
+  m_Layer: 5
+  m_Name: Screenfader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &681292293
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681292292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1653426227}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &681292294
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681292292}
+  m_Enabled: 1
+  m_Alpha: 0.14
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &681292295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681292292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &681292296
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681292292}
+  m_CullTransparentMesh: 1
+--- !u!114 &681292297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681292292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5a86bc6101fd04f9b50c55e12e61ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenFader
+  group: {fileID: 0}
+  fadeOutTime: 0.15
+  fadeInTime: 0.15
 --- !u!1 &736616768
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,6 +1029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   playerRoot: {fileID: 6798809723215627616}
   currentContentScene: 
+  fader: {fileID: 681292297}
 --- !u!1 &1459360063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5381363121763248248, guid: cf30db21a4709471eba5e0b8977b0ede, type: 3}
@@ -1939,6 +2044,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2029348496947087661, guid: 317690f2695c5a84b91f36f25d2c427b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1896222599}
+    - targetCorrespondingSourceObject: {fileID: 2029348496947087661, guid: 317690f2695c5a84b91f36f25d2c427b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 681292293}
     - targetCorrespondingSourceObject: {fileID: 7229579029702171381, guid: 317690f2695c5a84b91f36f25d2c427b, type: 3}
       insertIndex: 0
       addedObject: {fileID: 736616769}

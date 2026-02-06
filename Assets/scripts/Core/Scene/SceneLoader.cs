@@ -9,6 +9,9 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] Transform playerRoot;
     [SerializeField] string currentContentScene;
 
+    [Header("Transition")]
+    [SerializeField] ScreenFader fader;
+
     public string CurrentContentSceneName => currentContentScene;
 
     bool isLoading;
@@ -40,6 +43,8 @@ public class SceneLoader : MonoBehaviour
     {
         isLoading = true;
 
+        if (fader) yield return fader.FadeOut();
+
         // Wenn die Scene schon geladen ist: nur aktiv setzen + Player umsetzen
         if (IsLoaded(newScene))
         {
@@ -48,16 +53,16 @@ public class SceneLoader : MonoBehaviour
 
             PlacePlayerAtSpawn(spawnId);
 
-            // Musik kommt automatisch über SceneAudioTag.Start()
+            // optional: 1 Frame warten, damit alles "settled"
+            yield return null;
 
-            yield return new WaitForSeconds(0.15f);
+            if (fader) yield return fader.FadeIn();
 
             isLoading = false;
             yield return HandlePendingIfAny();
             yield break;
         }
 
-        // alte merken, bevor wir überschreiben
         string oldScene = currentContentScene;
 
         // neue Content-Scene laden
@@ -68,8 +73,6 @@ public class SceneLoader : MonoBehaviour
 
         PlacePlayerAtSpawn(spawnId);
 
-        // Musik kommt automatisch über SceneAudioTag.Start() in der neu geladenen Scene
-
         // alte Content-Scene unloaden (wenn vorhanden)
         if (!string.IsNullOrEmpty(oldScene) &&
             oldScene != newScene &&
@@ -78,7 +81,9 @@ public class SceneLoader : MonoBehaviour
             yield return SceneManager.UnloadSceneAsync(oldScene);
         }
 
-        yield return new WaitForSeconds(0.15f);
+        yield return null;
+
+        if (fader) yield return fader.FadeIn();
 
         isLoading = false;
         yield return HandlePendingIfAny();

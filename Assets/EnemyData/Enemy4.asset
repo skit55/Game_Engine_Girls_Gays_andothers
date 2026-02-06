@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91049027c4e9084184aad3e317824d5, type: 3}
   m_Name: Enemy4
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  pattern: 0000000002000000010000000300000003000000010000000000000002000000020000000100000003000000
+  pattern: 00000000020000000100000003000000030000000100000000000000
   maxHealth: 3
-  projectileTravelTime: 0.6
-  chainGap: 1.2
-  startJitter: 0
-  controlJitter: 4
+  projectileTravelTime: 0.76
+  chainGap: 0.93
+  startJitter: 2.73
+  controlJitter: 3.12
   projectilePrefab: {fileID: 551867604259047655, guid: e9ed073777d4df4469186dd2dcc3fc90, type: 3}
