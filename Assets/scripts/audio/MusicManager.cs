@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioClip street2Loop;
     [SerializeField] AudioClip indoorLoop;
     [SerializeField] AudioClip fightLoop;
+
+    [Header("Mixer")]
+    [SerializeField] AudioMixerGroup musicGroup; // <- assign in Inspector (e.g. "Music")
 
     [Header("Settings")]
     [SerializeField] float volume = 0.9f;
@@ -31,6 +35,10 @@ public class MusicManager : MonoBehaviour
         src.playOnAwake = false;
         src.spatialBlend = 0f; // 2D
         src.volume = volume;
+
+        // Route through mixer group
+        if (musicGroup != null)
+            src.outputAudioMixerGroup = musicGroup;
     }
 
     // Called by SceneAudioTag.Start()
